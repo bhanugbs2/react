@@ -6,13 +6,11 @@ function App() {
   const [input, setInput] = useState("");
   const [editId, setEditId] = useState(null);
 
-  // Load tasks from localStorage
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem("tasks"));
     if (savedTasks) setTasks(savedTasks);
   }, []);
 
-  // Save tasks to localStorage
   useEffect(() => {
   const savedTasks = JSON.parse(localStorage.getItem("tasks"));
 
@@ -21,7 +19,6 @@ function App() {
   }
 }, []);
 
-  // Add or Update Task
   const handleAdd = () => {
     if (!input.trim()) return;
 
@@ -40,19 +37,16 @@ function App() {
     setInput("");
   };
 
-  // Delete Task
   const handleDelete = (id) => {
     setTasks(tasks.filter(task => task.id !== id));
   };
 
-  // Toggle Complete
   const handleToggle = (id) => {
     setTasks(tasks.map(task =>
       task.id === id ? { ...task, completed: !task.completed } : task
     ));
   };
 
-  // Edit Task
   const handleEdit = (task) => {
     setInput(task.text);
     setEditId(task.id);
